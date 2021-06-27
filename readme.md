@@ -1,6 +1,6 @@
 # PyDGC_verif.py
 
-python experiment to decode European Union Digital Green Certificate
+python experiment to decode and verify European Union Digital Green Certificate
 
 
 
@@ -8,20 +8,17 @@ python experiment to decode European Union Digital Green Certificate
 
 
 
-verification not found yet
-
 #### Decoding example
 
 
 ```
-I:\dev\PyDGC_verif>python PyDGC.py dgc2.txt
+I:\dev\PyDGC_verif>python PyDGC_verif.py dgc2.txt
 [+]base45 decoding
 [+]zlib decompress
 [+]CBOR decoding
 [b'\xa2\x01&\x04Hp\xaa\xa4F\x0bV\xd1|', {}, b'\xa4\x01bFR\x04\x1aa\x10S\xe0\x06\x1a`\xbf\xe8`9\x01\x03\xa1\x01\xa4av\x81\xaabcix\x1durn:uvci:01:FR:KKF3BYIGYSVF#QbcobFRbdn\x01bdtj2021-03-01bisdCNAMbmamORG-100030215bmplEU/1/20/1528bsd\x02btgi840539006bvpj1119349007cdobj1962-05-31cnam\xa4bfnotheoule sur merbgnkjean pierrecfntoTHEOULE<SUR<MERcgntkJEAN<PIERREcvere1.0.0', b'\xebKSB\xa3x\x17\xb5\xd0\xc6\xda\x80\xaa\xf1}6N\xa0\x80\xad\xa26\x96Xfn,\xb8\xc6K\xebe7\xfe\x9e\xa0\x82\xda\xa7\x08\x1f\x16\xac\xfc\xe33\x9c\xca\xf3\x1c\xf0g\x11\xfb\n\xc4\xd1\x81\x1eH\x1a\xab\xdc?']
 [+]decoding COSE protected header
-{1: -7, 4: b'p\xaa\xa4F\x0bV\xd1|'}
-kid: b'70aaa4460b56d17c'
+  kid b'70aaa4460b56d17c' is matching 8 first bytes of sha256(cert.der)
 [+]decoding payload
 {
   "1": "FR",
@@ -55,12 +52,20 @@ kid: b'70aaa4460b56d17c'
   }
 }
 [+]COSE ECDSA signature:
-b'eb4b5342a37817b5d0c6da80aaf17d364ea080ada2369658666e2cb8c64beb6537fe9ea082daa7081f16acfce3339ccaf31cf06711fb0ac4d1811e481aabdc3f' 64
+b'eb4b5342a37817b5d0c6da80aaf17d364ea080ada2369658666e2cb8c64beb6537fe9ea082daa7081f16acfce3339ccaf31cf06711fb0ac4d1811e481aabdc3f' 
 [+]verifying COSE signature
+is signature valid ? True
 ```
 
 ### References
 
 - https://ec.europa.eu/health/ehealth/covid-19_en
-- https://datatracker.ietf.org/doc/html/rfc8152
 - https://github.com/eu-digital-green-certificates
+- CBOR : https://www.rfc-editor.org/rfc/rfc8949
+- COSE : https://datatracker.ietf.org/doc/html/rfc8152
+- COSE: https://cose-wg.github.io/cose-spec/#rfc.section.8.1
+
+### Third party python libraries
+
+- https://pypi.org/project/cose/ 
+- https://pypi.org/project/cbor2
